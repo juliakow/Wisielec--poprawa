@@ -1,30 +1,36 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Keyboard from "../Keyboard/Keyboard";
 import WordDisplay from "../WordDisplay/WordDisplay";
-import Ilustration from "../Ilustration/Ilustration";
-import Words from "../../Words.json";
-import { GameProvider } from "./GameContext";
-import GameContext from "./GameContext";
+// import Illustration from "../Illustration/Illustration";
+import words from "../../Words.json"; 
 
 const Game = () => {
+    const [randomWord, setRandomWord] = useState("");
+    const [selectedLetters, setSelectedLetters] = useState([]);
+    const [attempts, setAttempts] = useState(0);
+
     useEffect(() => {
-        setRandomWord(generateRandomWord());
+        const selectRandomWord = () => {
+            const randomIndex = Math.floor(Math.random() * words.length);
+            setRandomWord(words[randomIndex]);
+        };
+
+        selectRandomWord();
     }, []);
-    
 
+    const handleSelectLetter = (letter) => {
+        if (!selectedLetters.includes(letter)) {
+            setSelectedLetters([...selectedLetters, letter]);
+        }
+    };
 
-const randomWord = generateRandomWord();
-console.log("Wtygenerowane słowo:", randomWord);
-
-    return(
+    return (
         <div className="game">
-            <GameProvider>
-            <WordDisplay/>
-            <Keyboard  />
-            <Ilustration />
-            </GameProvider>
+            <WordDisplay words={words} selectedLetters={selectedLetters} />
+            <Keyboard onSelectLetter={handleSelectLetter} selectedLetters={selectedLetters} />
+            {/* <Illustration attempts={attempts} /> */}
         </div>
-    )
-}
+    );
+};
+
 export default Game;

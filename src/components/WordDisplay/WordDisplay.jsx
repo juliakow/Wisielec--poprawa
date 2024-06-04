@@ -1,27 +1,20 @@
-import React, { useContext } from "react";
-import GameContext from "../Game/GameContext";
+import { useEffect, useState } from "react";
 
-const WordDisplay = () => {
-    const { randomWord, selectedLetters } = useContext(GameContext);
+const WordDisplay = (props) => {
+    const { words, selectedLetters } = props;
+    const [wordsVisible, setWordsVisible] = useState("");
 
-    // Funkcja do sprawdzenia, czy litera jest częścią słowa
-    const isLetterInWord = (letter) => {
-        return randomWord.toLowerCase().split('').includes(letter.toLowerCase());
-    };
+    useEffect(() => {
+        if (selectedLetters && selectedLetters.length > 0) {
+            setWordsVisible(words.filter(word => word.includes(selectedLetters.join(""))).join(" "));
+        } else {
+            setWordsVisible(words.join(" "));
+        }
+    }, [selectedLetters, words]);
 
-    // Mapowanie każdego znaku słowa do odpowiedniego wyświetlania
     return (
-        <div className="word-display">
-            {randomWord.split('').map((char, index) => {
-                // Jeśli litera nie została jeszcze odgadnięta, wyświetlamy '_'
-                if (!isLetterInWord(char) &&!selectedLetters.includes(char)) {
-                    return <span key={index}>_ </span>;
-                }
-                // Jeśli litera została odgadnięta, wyświetlamy samą literę
-                else {
-                    return <span key={index}>{char} </span>;
-                }
-            })}
+        <div>
+            {wordsVisible}
         </div>
     );
 };
