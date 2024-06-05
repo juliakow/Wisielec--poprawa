@@ -28,7 +28,6 @@ const Game = () => {
         <div className="game">
             <WordDisplay words={words} selectedLetters={selectedLetters} />
             <Keyboard onSelectLetter={handleSelectLetter} selectedLetters={selectedLetters} />
-            {/* <Illustration attempts={attempts} /> */}
         </div>
     );
 };
