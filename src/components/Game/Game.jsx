@@ -24,9 +24,11 @@ const Game = () => {
         }
     };
 
+    console.log(selectedLetters)
+
     return (
         <div className="game">
-            <WordDisplay words={words} selectedLetters={selectedLetters} />
+            <WordDisplay randomWord={randomWord} selectedLetters={selectedLetters} />
             <Keyboard onSelectLetter={handleSelectLetter} selectedLetters={selectedLetters} />
         </div>
     );

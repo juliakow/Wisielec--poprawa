@@ -1,21 +1,17 @@
-import { useEffect, useState } from "react";
+import React from "react";
+
 
 const WordDisplay = (props) => {
-    const { words, selectedLetters } = props;
-    const [wordsVisible, setWordsVisible] = useState("");
+    const { randomWord, selectedLetters } = props;
 
-    useEffect(() => {
-        if (selectedLetters && selectedLetters.length > 0) {
-            setWordsVisible(words.filter(word => word.includes(selectedLetters.join(""))).join(" "));
-        } else {
-            setWordsVisible(words.join(" "));
-        }
-    }, [selectedLetters, words]);
+
 
     return (
         <div>
-            {wordsVisible}
-        </div>
+        {randomWord.split("").map((letter, index) => 
+            selectedLetters.includes(letter) ? letter : "_"
+        ).map(letter => <span>{letter}</span>)}
+    </div>
     );
 };
 
