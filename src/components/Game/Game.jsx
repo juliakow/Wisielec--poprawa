@@ -3,6 +3,7 @@ import Keyboard from "../Keyboard/Keyboard";
 import WordDisplay from "../WordDisplay/WordDisplay";
 // import Illustration from "../Illustration/Illustration";
 import words from "../../Words.json"; 
+import { NavLink } from "react-router-dom";
 
 const Game = () => {
     const [randomWord, setRandomWord] = useState("");
@@ -30,6 +31,13 @@ const Game = () => {
         <div className="game">
             <WordDisplay randomWord={randomWord} selectedLetters={selectedLetters} />
             <Keyboard onSelectLetter={handleSelectLetter} selectedLetters={selectedLetters} />
+            <nav>
+                <li>
+                    <NavLink to="/">
+                        <a>Home</a>
+                    </NavLink>
+                </li>
+            </nav>
         </div>
     );
 };

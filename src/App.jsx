@@ -3,14 +3,19 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Game from './components/Game/Game'
+import {Routes, Route} from "react-router-dom"
+import Home from './components/Home/Home'
 
 function App() {
 
 
   return (
-    <div>
-      <Game />
-    </div>
+<>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Game" element={<Game />} />
+      </Routes>
+    </>
   )
 }
 
